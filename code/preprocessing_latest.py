@@ -27,17 +27,3 @@ def preprocess_data(data, feature_cols, target_col, time_steps=60, test_size=0.2
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=42, shuffle=False)
 
     return X_train, X_test, y_train, y_test, scaler
-
-# # Using the function
-# data = pd.read_csv('train.csv')
-# feature_cols = ['Open', 'High', 'Low', 'Close']  # or just ['Close'] for using only the closing price
-# target_col = 'Close'
-# time_steps = 60
-# test_size = 0.2
-#
-# X_train, X_test, y_train, y_test= preprocess_data(data, feature_cols, target_col, time_steps, test_size)
-#
-# print(X_train)
-# print(y_train)
-# print(X_test)
-# print(y_test)

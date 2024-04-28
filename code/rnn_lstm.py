@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import tensorflow as tf
-from preprocessing import preprocess_data
+from preprocessing_latest import preprocess_data
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
@@ -26,24 +26,23 @@ class MyRNN(tf.keras.Model):
         # x = self.dropout2(x)
         return self.dense(x)
 
+
 def train_model(X_train, y_train, X_test, y_test, epochs=100, batch_size=32):
     input_shape = (X_train.shape[1], X_train.shape[2])
     model = MyRNN(units=200, input_shape=input_shape)
     optimizer = Adam(learning_rate=0.001)
     model.compile(optimizer=optimizer, loss='mean_squared_error')
 
-
-
     history = model.fit(
         X_train, y_train,
         epochs=epochs,
         batch_size=batch_size,
         validation_data=(X_test, y_test),
-
         verbose=1
     )
 
     return model, history
+
 
 def plot_history(history):
     plt.figure(figsize=(10, 5))
@@ -58,7 +57,7 @@ def plot_history(history):
 
 
 def main():
-    data = pd.read_csv('data1.csv')
+    data = pd.read_csv('../data/data.csv')
     feature_cols = ['Open', 'High', 'Low', 'Close']
     target_col = 'Close'
     X_train, X_test, y_train, y_test, target_scaler = preprocess_data(data, feature_cols, target_col, time_steps=60, test_size=0.2)
@@ -82,8 +81,6 @@ def main():
     plt.show()
 
     return model, history
-
-
 
 
 if __name__ == '__main__':
