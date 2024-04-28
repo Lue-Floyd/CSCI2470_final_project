@@ -15,7 +15,7 @@ It returns the features and targets of the divided training and test sets, which
 
 **Model implementation is complete or nearly complete**
 We used the “closing price” in the training set, brought the data into the LSTM model, and obtained a prediction result. 
-![alt text](prediction_result1.jpg)
+[Imgur](https://i.imgur.com/RPLcn5h.jpg)
 
 ## Challenges we ran into
 During our initial training, the loss was very large, even hundreds of millions.
