@@ -12,8 +12,8 @@ from datetime import datetime, timedelta
 def build_lstm_model(input_shape):
     model = tf.keras.models.Sequential()
     model.add(tf.keras.layers.LSTM(units=200, return_sequences=True, input_shape=input_shape))
-    model.add(tf.keras.layers.LSTM(units=100, return_sequences=True))
-    model.add(tf.keras.layers.LSTM(units=50, return_sequences=False))
+    model.add(tf.keras.layers.LSTM(units=200, return_sequences=True))
+    model.add(tf.keras.layers.LSTM(units=200, return_sequences=False))
     model.add(tf.keras.layers.Dense(units=1))  # Output layer
 
     return model
@@ -21,7 +21,7 @@ def build_lstm_model(input_shape):
 
 def main():
     data = pd.read_csv('../data/data.csv')
-    feature_cols = ['Open', 'High', 'Low', 'Close']
+    feature_cols = ['Open', 'High', 'Low', 'Close', 'Rate']
     target_col = 'Close'
     time_steps = 60
     test_size = 0.2

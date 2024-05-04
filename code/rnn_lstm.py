@@ -6,7 +6,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 import matplotlib.pyplot as plt  # Import matplotlib for plotting
-from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.optimizers.legacy import Adam
+from datetime import datetime, timedelta
 
 
 # Custom LSTM model using subclassing
@@ -58,10 +59,10 @@ def plot_history(history):
 
 def main():
     data = pd.read_csv('../data/data.csv')
-    feature_cols = ['Open', 'High', 'Low', 'Close']
+    feature_cols = ['Open', 'High', 'Low', 'Close', 'Rate']
     target_col = 'Close'
     X_train, X_test, y_train, y_test, target_scaler = preprocess_data(data, feature_cols, target_col, time_steps=60, test_size=0.2)
-    model, history = train_model(X_train, y_train, X_test, y_test, epochs=100, batch_size=64)
+    model, history = train_model(X_train, y_train, X_test, y_test, epochs=80, batch_size=64)
     plot_history(history)  # Visualize the training and validation loss
 
     # Make predictions
@@ -69,11 +70,16 @@ def main():
     y_pred = target_scaler.inverse_transform(y_pred_scaled)
     y_actual = target_scaler.inverse_transform(y_test)
 
+    end_date = datetime(2023, 12, 31)  # Adjust this if needed
+    start_date = end_date - timedelta(days=len(y_test) - 1)
+
+    # Generate date range for x-axis
+    date_range = pd.date_range(start=start_date, end=end_date, freq='D')
+
     # Plot actual vs predicted prices
     plt.figure(figsize=(10, 5))
-    plt.plot(y_actual, label='Actual Close Price')
-    # plt.plot(y_pred, label='Predicted Close Price', linestyle='--', color='red')
-    plt.plot(y_pred, label='Predicted Close Price', color='red')
+    plt.plot(date_range, y_actual, label='Actual Close Price')
+    plt.plot(date_range, y_pred, label='Predicted Close Price', color='red')
     plt.title('Actual vs Predicted Close Prices')
     plt.xlabel('Time Steps')
     plt.ylabel('Price')
@@ -85,5 +91,4 @@ def main():
 
 if __name__ == '__main__':
     model, history = main()
-    # model.save('final_model.h5', save_format="tf")  # Save the trained model
     model.save_weights('final_model_weights.h5')
