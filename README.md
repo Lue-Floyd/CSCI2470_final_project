@@ -1,5 +1,11 @@
 # CSCI2470_final_project
 final project
+
+## How to run the code
+The data.csv file contains various factors such as rate, high, and low, which directly influence the model. The preprocessing_latest.py script is utilized to preprocess this data, while run_lstm.py is the script used for model training. The final_model_weights.h5 file stores the weights of the trained model.
+
+Additionally, the preprocessing_interest.py and pre_interest_final.py scripts are designed to preprocess the pre_interest_rate.csv file, resulting in the processed final_interest_rate.csv.
+
 ## Inspiration
 As the digital currency market develops, we will inevitably be involved in the torrent. We hope to use our knowledge to explore the changing trends behind digital currencies.
 
