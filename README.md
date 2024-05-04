@@ -10,7 +10,7 @@ Additionally, the preprocessing_interest.py and pre_interest_final.py scripts ar
 As the digital currency market develops, we will inevitably be involved in the torrent. We hope to use our knowledge to explore the changing trends behind digital currencies.
 
 ## What it does
-We hope to use LSTM or RNN models to predict the future price trend of digital currencies.
+We hope to use LSTM models to predict the future price trend of digital currencies.
 
 ## How we built it
 **Data is collected and preprocessed**
