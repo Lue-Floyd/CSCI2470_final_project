@@ -46,6 +46,18 @@ After that, we try to consider non-price factors, specific policy reasons were i
 [Imgur](https://imgur.com/3JBEPuW.jpg)
 
 
+And when we output the test results, we found that the results were in an overfit state, so we added a dropout layer to solve the problem. For the problem of poor visualization of the fitting results, it is because the closing price data of train was regularized, but the closing price data of test was not. Therefore, we also regularized the data in the test set. Besides, we increased the number of training times and found that the effect would improve.
+[Imgur](https://i.imgur.com/LrvSviY.jpg)
+[Imgur](https://i.imgur.com/GTZDOYS.jpg)
+[Imgur](https://i.imgur.com/RPLcn5h.jpg)
+## Accomplishments that we're proud of
+This is our prediction of future "closing price" based on historical " Open, High, Low, Closing price" data:
+[Imgur](https://i.imgur.com/RPLcn5h.jpg)
+
+After that, we try to consider non-price factors, specific policy reasons were initially considered, but due to the short time, it was difficult to quantitatively integrate the policy into the model. Therefore, we used the "interest rate" published by the Federal Reserve. And we perform data cleaning: complete the ND data with the previous day's data. And since markets are closed over the weekend, there is no data, but that is not the case with digital currencies. We insert two rows of Friday's "interest rate" after each "Friday" to match the data format of the "seven days" of the week.
+[Imgur](https://imgur.com/3JBEPuW.jpg)
+
+
 ## What we learned
 Through this project, we learned the importance of preprocessing and feature selection in machine learning. Adjusting activation functions, such as switching between softmax and relu, yielded varied results, highlighting the sensitivity of neural networks to function choices.  Our experiences also underscored the challenges of integrating non-price factors like interest rates into predictive models, necessitating innovative approaches to data integration and cleaning.
 
